@@ -1,192 +1,742 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact Page</title>
-  <!-- Font Awesome -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Mansa Leaf Productions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/dist/main.css" />
+  <link rel="stylesheet" href="/src/css/main.css" />
 
-    <!-- Tailwind Font -->
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <style>
+    :root {
+      --ink-900: #071f23;
+      --mint-500: #14b8a6;
+      --mint-300: #49dccd;
+      --paper-100: #f8f9f7;
+      --panel: rgba(7, 31, 35, 0.74);
+      --glow: 0 24px 80px rgba(20, 184, 166, 0.2);
+    }
 
-  <!-- AOS Stylesheet -->
-  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+      background: #041216;
+    }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/dist/main.css">
-   <link href="/src/css/main.css" rel="stylesheet"> 
+    body.contact-page {
+      margin: 0;
+      color: var(--paper-100);
+      font-family: "Sora", sans-serif;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(73, 220, 205, 0.24), transparent 45%),
+        radial-gradient(circle at 88% 16%, rgba(255, 255, 255, 0.15), transparent 40%),
+        linear-gradient(165deg, #041216 0%, #0a272f 52%, #07171d 100%);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background-color: #041216;
+      display: flex;
+      flex-direction: column;
+    }
 
-     <!-- AOS JavaScript -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  
+    .contact-page main {
+      flex: 1 0 auto;
+      padding-bottom: clamp(1rem, 3vw, 2rem);
+    }
 
+    .contact-page .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      background: rgba(4, 18, 22, 0.55);
+    }
 
-     <!-- Lord Icons -->
-  <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    .contact-page .site-nav::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(73, 220, 205, 0.5), transparent);
+    }
 
-   <!-- Main JavaScript -->
-   <script src="/src/js/main.js"></script>
+    .contact-page .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 72px;
+    }
 
-    <!-- JavaScript for Mobile Menu Toggle -->
- 
+    .contact-page .brand-link {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 12px;
+      outline: none;
+    }
 
+    .contact-page .brand-link:focus-visible {
+      box-shadow: 0 0 0 3px rgba(73, 220, 205, 0.28);
+    }
 
+    .contact-page .brand-link img {
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
+    }
 
+    .contact-page .nav-links-desktop {
+      display: none;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0;
+      padding: 0.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+      list-style: none;
+    }
+
+    .contact-page .nav-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #e4f8f4;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 0.62rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 220ms ease;
+    }
+
+    .contact-page .nav-chip:hover {
+      color: #fff;
+      border-color: rgba(73, 220, 205, 0.5);
+      background: rgba(73, 220, 205, 0.14);
+    }
+
+    .contact-page .nav-chip[aria-current="page"] {
+      color: #022126;
+      border-color: rgba(73, 220, 205, 0.8);
+      background: linear-gradient(135deg, var(--mint-500), #0f9d95);
+      box-shadow: 0 10px 24px rgba(20, 184, 166, 0.25);
+    }
+
+    .contact-page .nav-toggle {
+      color: #e9fbf8;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 0.42rem;
+    }
+
+    .contact-page #mobile-menu {
+      background: rgba(4, 18, 22, 0.86);
+      backdrop-filter: blur(10px);
+    }
+
+    .contact-page .mobile-links {
+      list-style: none;
+      margin: 0;
+      padding: 0.75rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .contact-page .mobile-link {
+      display: block;
+      color: #e8f8f6;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      transition: all 220ms ease;
+    }
+
+    .contact-page .mobile-link:hover {
+      border-color: rgba(73, 220, 205, 0.5);
+      background: rgba(73, 220, 205, 0.14);
+    }
+
+    .contact-page .mobile-link[aria-current="page"] {
+      color: #032025;
+      border-color: rgba(73, 220, 205, 0.8);
+      background: linear-gradient(135deg, var(--mint-500), #0f9d95);
+    }
+
+    .contact-page .content-shell {
+      width: min(1160px, calc(100% - clamp(1rem, 4vw, 2.5rem)));
+      margin: 0 auto;
+    }
+
+    .contact-page h1,
+    .contact-page h2,
+    .contact-page h3 {
+      font-family: "Syne", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .contact-page .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(73, 220, 205, 0.16);
+      border: 1px solid rgba(73, 220, 205, 0.42);
+      color: #caf5ef;
+      letter-spacing: 0.08em;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .contact-page .hero {
+      padding: clamp(2.4rem, 7vw, 4.6rem) 0 clamp(3rem, 8vw, 6rem);
+      text-align: center;
+    }
+
+    .contact-page .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.9rem);
+      line-height: 1;
+      margin: 0.9rem auto 0.9rem;
+      max-width: 14ch;
+    }
+
+    .contact-page .hero .highlight {
+      color: var(--mint-300);
+      text-shadow: 0 0 32px rgba(73, 220, 205, 0.3);
+    }
+
+    .contact-page .hero p {
+      color: #d3e4e2;
+      max-width: 65ch;
+      margin: 0.35rem auto 0;
+      line-height: 1.8;
+    }
+
+    .contact-page .contact-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(1rem, 2.5vw, 1.8rem);
+      margin-top: clamp(0.5rem, 1.5vw, 1.25rem);
+      padding-bottom: clamp(2.2rem, 6vw, 4.5rem);
+      align-items: start;
+    }
+
+    .contact-page .info-panel,
+    .contact-page .form-panel {
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+      padding: clamp(1rem, 2.4vw, 1.6rem);
+    }
+
+    .contact-page .info-panel {
+      display: grid;
+      gap: clamp(0.75rem, 1.6vw, 1rem);
+      align-content: start;
+    }
+
+    .contact-page .info-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      align-items: start;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: clamp(0.8rem, 1.6vw, 1rem);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .contact-page .info-item i {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--mint-300);
+      color: #032025;
+    }
+
+    .contact-page .info-item h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      color: #ecf8f6;
+    }
+
+    .contact-page .info-item p,
+    .contact-page .info-item a {
+      margin: 0.22rem 0 0;
+      color: #c2d6d3;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .contact-page .info-item a:hover {
+      color: #e9f6f4;
+    }
+
+    .contact-page .social {
+      display: flex;
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+
+    .contact-page .social a {
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #d8f4f0;
+      border: 1px solid rgba(216, 244, 240, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    }
+
+    .contact-page .social a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(73, 220, 205, 0.7);
+      background: rgba(73, 220, 205, 0.18);
+    }
+
+    .contact-page .form-intro {
+      margin-bottom: 1.1rem;
+    }
+
+    .contact-page form {
+      display: grid;
+      gap: 0.1rem;
+    }
+
+    .contact-page .form-intro p {
+      color: #c7dbd8;
+      line-height: 1.72;
+      margin: 0.5rem 0 0;
+    }
+
+    .contact-page .field {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: clamp(0.75rem, 1.6vw, 1rem);
+    }
+
+    .contact-page label {
+      color: #e4f3f1;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .contact-page input,
+    .contact-page textarea {
+      width: 100%;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      color: #f0fbf9;
+      font-size: 0.95rem;
+      font-family: "Sora", sans-serif;
+      padding: 0.82rem 0.9rem;
+      outline: none;
+      transition: border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .contact-page textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .contact-page input::placeholder,
+    .contact-page textarea::placeholder {
+      color: #9eb8b4;
+    }
+
+    .contact-page input:focus,
+    .contact-page textarea:focus {
+      border-color: rgba(73, 220, 205, 0.9);
+      box-shadow: 0 0 0 3px rgba(73, 220, 205, 0.18);
+    }
+
+    .contact-page .submit-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.88rem 1.15rem;
+      background: linear-gradient(135deg, var(--mint-500), #0f9d95);
+      color: #032025;
+      cursor: pointer;
+      box-shadow: var(--glow);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      margin-top: 0.35rem;
+    }
+
+    .contact-page .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(20, 184, 166, 0.32);
+    }
+
+    .contact-page .site-footer {
+      margin-top: clamp(1.5rem, 4vw, 3rem);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+        rgba(4, 18, 22, 0.88);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-page .footer-shell {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding-block: clamp(1.35rem, 3vw, 2rem);
+    }
+
+    .contact-page .footer-brand {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .contact-page .footer-kicker {
+      margin: 0;
+      color: var(--mint-300);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .contact-page .footer-brand h2 {
+      margin: 0;
+      color: #f1fbf8;
+      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+      line-height: 1.05;
+    }
+
+    .contact-page .footer-copy {
+      margin: 0;
+      max-width: 42ch;
+      color: #bdd4d0;
+      line-height: 1.7;
+    }
+
+    .contact-page .footer-links {
+      display: grid;
+      gap: 0.65rem;
+      justify-items: start;
+    }
+
+    .contact-page .footer-links a {
+      color: #edf7f5;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.22rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color 220ms ease, border-color 220ms ease, transform 220ms ease;
+    }
+
+    .contact-page .footer-links a:hover {
+      color: var(--mint-300);
+      border-color: rgba(73, 220, 205, 0.42);
+      transform: translateX(2px);
+    }
+
+    .contact-page .footer-social {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .contact-page .footer-social a {
+      width: 2.8rem;
+      height: 2.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #dff7f3;
+      border: 1px solid rgba(223, 247, 243, 0.22);
+      background: rgba(255, 255, 255, 0.04);
+      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    }
+
+    .contact-page .footer-social a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(73, 220, 205, 0.7);
+      background: rgba(73, 220, 205, 0.16);
+    }
+
+    .contact-page .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-block: 0 1.4rem;
+    }
+
+    .contact-page .footer-bottom p {
+      margin: 0;
+      color: #aabdb9;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .contact-page .reveal-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .contact-page .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .contact-page .hero {
+        text-align: left;
+      }
+
+      .contact-page .hero h1,
+      .contact-page .hero p {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .contact-page .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .contact-page .nav-links-desktop {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .contact-page .content-shell {
+        width: min(1160px, calc(100% - 1.2rem));
+      }
+
+      .contact-page .hero h1 {
+        max-width: none;
+      }
+
+      .contact-page .info-item {
+        gap: 0.65rem;
+      }
+
+      .contact-page .form-panel {
+        padding-bottom: 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-page .hero {
+        padding-top: 2rem;
+      }
+
+      .contact-page .info-item {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-page .info-item i {
+        width: 1.9rem;
+        height: 1.9rem;
+      }
+
+      .contact-page .social {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
-<!-- CSS -->
-<link href="dist/main.css" rel="stylesheet">
-<link rel="stylesheet" href="/src/css/main.css">
-</head>
-     <!-- Header End -->
 
-     <!-- Navbar -->
-     <header>
-      <nav class="flex center bg-teal-500 p-4" aria-label="Main navigation">
-        <div class="container flex justify-between items-center py-4 md:py-4 gap-2">
-  
-          <!-- Logo -->
-          <div class="flex items-center">
-            <img class="logo !w-16 !h-auto sm:!w-20 md:!w-24 lg:!w-32" src="src/images/logo.png" alt="home-logo" />
-          </div>
-  
-          <!-- Desktop Navigation -->
-          <ul class="hidden sm:flex space-x-4 justify-center w-full">
-            <li><a href="index.html"
-                class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">Home</a></li>
-            <li><a href="about.html" class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">About</a>
-            </li>
-            <li><a href="about.html#projects"
-                class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">Projects</a></li>
-            <li><a href="contact.html"
-                class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">Contact</a></li>
-          </ul>
-  
-          <!-- Mobile Menu Button (visible on small screens) -->
-          <div class="block sm:hidden">
-            <button id="mobile-menu-toggle" type="button" aria-expanded="false"
-              class="text-white p-2 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-              <span class="sr-only">Open main menu</span>
-              <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-  
-        </div>
-      </nav>
-  
-      <!-- Mobile Menu (hidden by default, shown when toggled) -->
-      <div id="mobile-menu" class="sm:hidden hidden">
-        <ul class="flex flex-col bg-teal-500 center space-y-1 px-2 py-3">
-          <li><a href="index.html"
-              class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">Home</a></li>
-          <li><a href="#about"
-              class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">About</a></li>
-          <li><a href="#projects"
-              class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">Projects</a></li>
-          <li><a href="contact.html"
-              class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">Contact</a></li>
-        </ul>
+<body class="contact-page">
+  <header class="site-nav">
+    <nav class="content-shell nav-wrap" aria-label="Main navigation">
+      <a href="index.html" class="brand-link" aria-label="Go to homepage">
+        <img class="logo !w-16 !h-auto sm:!w-20 md:!w-24 lg:!w-32" src="src/images/logo.png" alt="Mansa Leaf Productions logo" />
+      </a>
+
+      <ul class="nav-links-desktop" role="list">
+        <li><a href="index.html" class="nav-chip">Home</a></li>
+        <li><a href="about.html" class="nav-chip">About</a></li>
+        <li><a href="about.html#projects" class="nav-chip">Projects</a></li>
+        <li><a href="contact.html" class="nav-chip" aria-current="page">Contact</a></li>
+      </ul>
+
+      <div class="block sm:hidden">
+        <button id="mobile-menu-toggle" type="button" aria-expanded="false"
+          class="nav-toggle focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-200">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
-    </header>
+    </nav>
 
-     <section class="contact">
-     <div class="content">
-      <h2>Contact Us</h2>
-      <p> Whether you’re looking to elevate your brand or create content that resonates deeply,
-         Salif’s mission is to inspire and motivate through the transformative power of video. Reach out today to bring your vision to life.</p>
-     </div>
-        <div class="container">
-          <div class="contactInfo">
-            <div class="box">
-              <div class="icon"><b></b><i class="fa-solid fa-phone"></i></i></div>
-              <div class="text">
-                <h3>Address</h3>
-                <p>New York, New York</p>
-              </div>
-            </div>
-          
-            <div class="box">
-              <div class="icon"><b></b><i class="fa-solid fa-envelope"></i></div>
-              <div class="text">
-                <h3>Email</h3>
-                <p>mansaleafproductions@gmail.com</p>
-              </div>
-            </div>
-            
-            <h2 class="txt">Connect with us</h2>
-            <ul class="sci">
-              <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-            
-            
-            </ul>
-        </div>
-        <div class="contactForm">
-          <form name="contact" netlify method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="contact" />
-            
-            <div class="inputBox">
-              <input type="text" name="name" id="name" autocomplete="name" required />
-              <span>Full Name</span>
-            </div>
-          
-            <div class="inputBox">
-              <input type="email" name="email" id="email" autocomplete="email" required />
-              <span>Email</span>
-            </div>
-          
-            <div class="inputBox">
-              <textarea name="message" id="message" autocomplete="off" required></textarea>
-              <span>Type your message...</span>
-            </div>
-          
-            <div class="inputBox">
-              <input type="submit" value="Send">
-            </div>
-          </form>
-          
-        </div>
-     </div> 
-     </section>
+    <div id="mobile-menu" class="sm:hidden hidden border-t border-white/15">
+      <ul class="mobile-links">
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="about.html#projects" class="mobile-link">Projects</a></li>
+        <li><a href="contact.html" class="mobile-link" aria-current="page">Contact</a></li>
+      </ul>
+    </div>
+  </header>
 
-
-
-
-     <!-- Foooter -->
-<section class="bg-white">
-  <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
-      <nav class="flex flex-wrap justify-center -mx-5 -my-2">
-          <div class="px-5 py-2">
-            <a href="terms.html" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Terms and Conditions
-              </a>
-          </div>
-      </nav>
-      <div class="flex justify-center mt-8 space-x-6">
-          
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-              <span class="sr-only">Instagram</span>
-              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
-              </svg>
-          </a>
-          
-      
-         
-      </div>
-      <p class="mt-8 text-base leading-6 text-center text-gray-400">
-          © 2025 Chukwu Tech Solutions, Inc. All rights reserved.
+  <main class="content-shell">
+    <section class="hero reveal-item" data-stagger="0">
+      <span class="pill"><i class="fas fa-paper-plane"></i> Let us create something unforgettable</span>
+      <h1>Bring your <span class="highlight">vision</span> to life.</h1>
+      <p>
+        Whether you are building a campaign, launching a brand story, or capturing a meaningful moment,
+        reach out and let us shape visuals that resonate and drive action.
       </p>
-  </div>
-</section>
-  <!-- end of footer -->
+    </section>
 
+    <section class="contact-layout">
+      <aside class="info-panel reveal-item" data-stagger="80">
+        <h2 class="text-2xl mb-1">Contact Details</h2>
+
+        <div class="info-item">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <div>
+            <h3>Location</h3>
+            <p>New York, New York</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          <div>
+            <h3>Email</h3>
+            <a href="mailto:mansaleafproductions@gmail.com">mansaleafproductions@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+          <div>
+            <h3>Follow</h3>
+            <div class="social">
+              <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="form-panel reveal-item" data-stagger="160">
+        <div class="form-intro">
+          <h2 class="text-2xl mb-0">Start Your Project</h2>
+          <p>Share a few details and we will get back to you with the next steps.</p>
+        </div>
+
+        <form name="contact" netlify method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <p hidden>
+            <label>Do not fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" id="name" autocomplete="name" placeholder="Your full name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" autocomplete="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" autocomplete="off" placeholder="Tell us about your idea..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="content-shell footer-shell">
+      <div class="footer-brand">
+        <p class="footer-kicker">Mansa Leaf Productions</p>
+        <h2>Visual stories with a clean, cinematic edge.</h2>
+        <p class="footer-copy">Based in New York and available for brand films, campaigns, and social content.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="terms.html">Terms and Conditions</a>
+        <a href="mailto:mansaleafproductions@gmail.com">mansaleafproductions@gmail.com</a>
+      </nav>
+
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="content-shell footer-bottom">
+      <p>© 2025 Chukwu Tech Solutions, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.getElementById("mobile-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", function () {
+          const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+          menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+          mobileMenu.classList.toggle("hidden");
+        });
+      }
+
+      const revealItems = document.querySelectorAll(".reveal-item");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const delay = Number(entry.target.dataset.stagger || 0);
+              setTimeout(function () {
+                entry.target.classList.add("is-visible");
+              }, delay);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      revealItems.forEach((item) => observer.observe(item));
+    });
+  </script>
 </body>
-
 </html>

@@ -1,398 +1,945 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About Me </title>
-  <!-- Font Awesome -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Mansa Leaf Productions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
+  <link rel="stylesheet" href="/dist/main.css" />
+  <link href="/src/css/main.css" rel="stylesheet" />
 
-  <!-- Tailwind Font -->
-  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <style>
+    :root {
+      --ink-900: #071f23;
+      --ink-700: #16363d;
+      --mint-500: #14b8a6;
+      --mint-300: #49dccd;
+      --sand-200: #f4ebdc;
+      --paper-100: #f8f9f7;
+      --glow: 0 24px 80px rgba(20, 184, 166, 0.2);
+      --panel: rgba(7, 31, 35, 0.74);
+    }
 
-  <!-- AOS Stylesheet -->
-  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+    }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/dist/main.css">
-  <link href="/src/css/main.css" rel="stylesheet">
+    body.about-page {
+      margin: 0;
+      color: var(--paper-100);
+      font-family: "Sora", sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(73, 220, 205, 0.24), transparent 45%),
+        radial-gradient(circle at 88% 18%, rgba(244, 235, 220, 0.16), transparent 38%),
+        linear-gradient(165deg, #041216 0%, #0a272f 52%, #07171d 100%);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-  <!-- AOS JavaScript -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    .about-page main {
+      flex: 1 0 auto;
+    }
 
-  <!-- Lord Icons -->
-  <!-- <script src="https://cdn.lordicon.com/bhenfmcm.js"></script> -->
+    .about-page .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      background: rgba(4, 18, 22, 0.55);
+    }
 
-  <!-- Swiper.js CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    .about-page .site-nav::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(73, 220, 205, 0.5), transparent);
+    }
 
-  <!-- Swiper.js JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    .about-page .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 72px;
+    }
 
-  <!-- Main JavaScript -->
-  <script src="/src/js/main.js"></script>
+    .about-page .brand-link {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 12px;
+      outline: none;
+    }
 
-  <!-- JavaScript for Mobile Menu Toggle -->
+    .about-page .brand-link:focus-visible {
+      box-shadow: 0 0 0 3px rgba(73, 220, 205, 0.28);
+    }
 
+    .about-page .brand-link img {
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
+    }
+
+    .about-page .nav-links-desktop {
+      display: none;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0;
+      padding: 0.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+      list-style: none;
+    }
+
+    .about-page .nav-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #e4f8f4;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 0.62rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 220ms ease;
+    }
+
+    .about-page .nav-chip:hover {
+      color: #fff;
+      border-color: rgba(73, 220, 205, 0.5);
+      background: rgba(73, 220, 205, 0.14);
+    }
+
+    .about-page .nav-chip[aria-current="page"] {
+      color: #022126;
+      border-color: rgba(73, 220, 205, 0.8);
+      background: linear-gradient(135deg, var(--mint-500), #0f9d95);
+      box-shadow: 0 10px 24px rgba(20, 184, 166, 0.25);
+    }
+
+    .about-page .nav-toggle {
+      color: #e9fbf8;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 0.42rem;
+    }
+
+    .about-page #mobile-menu {
+      background: rgba(4, 18, 22, 0.86);
+      backdrop-filter: blur(10px);
+    }
+
+    .about-page .mobile-links {
+      list-style: none;
+      margin: 0;
+      padding: 0.75rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .about-page .mobile-link {
+      display: block;
+      color: #e8f8f6;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      transition: all 220ms ease;
+    }
+
+    .about-page .mobile-link:hover {
+      border-color: rgba(73, 220, 205, 0.5);
+      background: rgba(73, 220, 205, 0.14);
+    }
+
+    .about-page .mobile-link[aria-current="page"] {
+      color: #032025;
+      border-color: rgba(73, 220, 205, 0.8);
+      background: linear-gradient(135deg, var(--mint-500), #0f9d95);
+    }
+
+    .about-page .content-shell {
+      width: min(1160px, calc(100% - clamp(1rem, 4vw, 2.5rem)));
+      margin: 0 auto;
+    }
+
+    .about-page .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(73, 220, 205, 0.16);
+      border: 1px solid rgba(73, 220, 205, 0.42);
+      color: #caf5ef;
+      letter-spacing: 0.08em;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .about-page h1,
+    .about-page h2,
+    .about-page h3 {
+      font-family: "Syne", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .about-page .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(1rem, 2.6vw, 2rem);
+      padding: clamp(2.4rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3.25rem);
+      align-items: end;
+    }
+
+    .about-page .hero-title {
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 0.98;
+      max-width: 12ch;
+      margin: 1rem 0 1.2rem;
+    }
+
+    .about-page .highlight {
+      color: var(--mint-300);
+      text-shadow: 0 0 32px rgba(73, 220, 205, 0.3);
+    }
+
+    .about-page .hero-copy {
+      color: #d5e3e1;
+      max-width: 52ch;
+      line-height: 1.85;
+      margin-bottom: clamp(1.2rem, 3vw, 2rem);
+    }
+
+    .about-page .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: clamp(1.2rem, 3vw, 2.2rem);
+    }
+
+    .about-page .btn-primary,
+    .about-page .btn-secondary {
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 0.88rem 1.2rem;
+      font-size: 0.93rem;
+      transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+    }
+
+    .about-page .btn-primary {
+      background: linear-gradient(135deg, var(--mint-500), #0f9d95);
+      color: #032025;
+      box-shadow: var(--glow);
+    }
+
+    .about-page .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(20, 184, 166, 0.32);
+    }
+
+    .about-page .btn-secondary {
+      color: #dbf6f2;
+      border: 1px solid rgba(219, 246, 242, 0.32);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .about-page .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(73, 220, 205, 0.65);
+      background: rgba(73, 220, 205, 0.1);
+    }
+
+    .about-page .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .about-page .stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+    }
+
+    .about-page .stat strong {
+      display: block;
+      font-family: "Syne", sans-serif;
+      color: #dbf6f2;
+      font-size: 1.1rem;
+    }
+
+    .about-page .stat span {
+      font-size: 0.77rem;
+      color: #b8ceca;
+    }
+
+    .about-page .hero-visual {
+      border-radius: 26px;
+      padding: 1.05rem;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+    }
+
+    .about-page .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: -40% auto auto -20%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(73, 220, 205, 0.22), transparent 64%);
+      pointer-events: none;
+    }
+
+    .about-page .hero-visual img {
+      border-radius: 18px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 460px;
+      filter: saturate(1.06) contrast(1.03);
+    }
+
+    .about-page .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 2.6vw, 2rem);
+      margin: clamp(1.8rem, 5vw, 3rem) 0 1rem;
+      align-items: stretch;
+    }
+
+    .about-page .story-card,
+    .about-page .principles-card {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 20px;
+      padding: 1.7rem;
+    }
+
+    .about-page .story-card p {
+      line-height: 1.8;
+      color: #d6e5e3;
+      margin-bottom: 1rem;
+    }
+
+    .about-page .principles-list {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1.15rem;
+    }
+
+    .about-page .principle {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.9rem;
+      align-items: start;
+      padding: 0.9rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .about-page .principle i {
+      width: 2.05rem;
+      height: 2.05rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #032025;
+      background: var(--mint-300);
+    }
+
+    .about-page .principle h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: #e9f7f5;
+    }
+
+    .about-page .principle p {
+      margin: 0.2rem 0 0;
+      color: #bed4d1;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .about-page #projects {
+      padding: clamp(2.2rem, 6vw, 4rem) 0;
+    }
+
+    .about-page .gallery-container {
+      width: min(1160px, calc(100% - 2.5rem));
+      margin: 0 auto;
+      background: rgba(5, 23, 27, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 22px;
+      padding: clamp(0.95rem, 2.2vw, 1.6rem);
+    }
+
+    .about-page .gallery-container h2 {
+      margin: 0 0 1rem;
+      color: #ebf6f4;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+    }
+
+    .about-page .swiper-container {
+      position: relative;
+      overflow: hidden;
+      padding: 0.2rem 0.1rem 2rem;
+    }
+
+    .about-page .swiper-slide {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      height: auto;
+    }
+
+    .about-page .swiper-slide iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      display: block;
+    }
+
+    .about-page .video-description {
+      margin: 0;
+      padding: 0.8rem 0.9rem;
+      color: #dceae8;
+      font-size: clamp(0.82rem, 1.8vw, 0.9rem);
+      line-height: 1.45;
+      min-height: 58px;
+    }
+
+    .about-page .swiper-button-next,
+    .about-page .swiper-button-prev {
+      color: #e5f7f3;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(229, 247, 243, 0.35);
+      background: rgba(5, 23, 27, 0.55);
+      backdrop-filter: blur(4px);
+      top: 45%;
+    }
+
+    .about-page .swiper-button-next::after,
+    .about-page .swiper-button-prev::after {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .about-page .swiper-pagination-bullet {
+      background: #9acdc7;
+      opacity: 0.7;
+    }
+
+    .about-page .swiper-pagination-bullet-active {
+      background: var(--mint-300);
+      opacity: 1;
+    }
+
+    @media (max-width: 767px) {
+      .about-page .swiper-container {
+        padding-bottom: 1.4rem;
+      }
+
+      .about-page .swiper-button-next,
+      .about-page .swiper-button-prev {
+        display: none;
+      }
+
+      .about-page .video-description {
+        min-height: 48px;
+      }
+    }
+
+    .about-page .site-footer {
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+        rgba(4, 18, 22, 0.88);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .about-page .footer-shell {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding-block: clamp(1.35rem, 3vw, 2rem);
+    }
+
+    .about-page .footer-brand {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .about-page .footer-kicker {
+      margin: 0;
+      color: var(--mint-300);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .about-page .footer-brand h2 {
+      margin: 0;
+      color: #f1fbf8;
+      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+      line-height: 1.05;
+    }
+
+    .about-page .footer-copy {
+      margin: 0;
+      max-width: 42ch;
+      color: #bdd4d0;
+      line-height: 1.7;
+    }
+
+    .about-page .footer-links {
+      display: grid;
+      gap: 0.65rem;
+      justify-items: start;
+    }
+
+    .about-page .footer-links a {
+      color: #edf7f5;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.22rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color 220ms ease, border-color 220ms ease, transform 220ms ease;
+    }
+
+    .about-page .footer-links a:hover {
+      color: var(--mint-300);
+      border-color: rgba(73, 220, 205, 0.42);
+      transform: translateX(2px);
+    }
+
+    .about-page .footer-social {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .about-page .footer-social a {
+      width: 2.8rem;
+      height: 2.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #dff7f3;
+      border: 1px solid rgba(223, 247, 243, 0.22);
+      background: rgba(255, 255, 255, 0.04);
+      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    }
+
+    .about-page .footer-social a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(73, 220, 205, 0.7);
+      background: rgba(73, 220, 205, 0.16);
+    }
+
+    .about-page .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-block: 0 1.4rem;
+    }
+
+    .about-page .footer-bottom p {
+      margin: 0;
+      color: #aabdb9;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .about-page .reveal-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .about-page .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1000px) {
+      .about-page .hero-grid,
+      .about-page .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-page .hero-visual img {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .about-page .stats-row {
+        grid-template-columns: 1fr;
+      }
+
+      .about-page .content-shell,
+      .about-page .gallery-container {
+        width: min(1160px, calc(100% - 1.2rem));
+      }
+
+      .about-page .hero-title {
+        max-width: none;
+      }
+
+      .about-page .pill {
+        letter-spacing: 0.05em;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .about-page .nav-links-desktop {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-page .hero-visual {
+        padding: 0.7rem;
+      }
+
+      .about-page .hero-visual img {
+        min-height: 300px;
+      }
+
+      .about-page .story-card,
+      .about-page .principles-card {
+        padding: 1rem;
+      }
+
+      .about-page .video-description {
+        padding: 0.65rem 0.7rem;
+      }
+    }
+  </style>
 </head>
 
+<body class="about-page">
+  <header class="site-nav">
+    <nav class="content-shell nav-wrap" aria-label="Main navigation">
+      <a href="index.html" class="brand-link" aria-label="Go to homepage">
+        <img class="logo !w-16 !h-auto sm:!w-20 md:!w-24 lg:!w-32" src="src/images/logo.png" alt="Mansa Leaf Productions logo" />
+      </a>
 
-<body>
+      <ul class="nav-links-desktop" role="list">
+        <li><a href="index.html" class="nav-chip">Home</a></li>
+        <li><a href="#about" class="nav-chip" aria-current="page">About</a></li>
+        <li><a href="#projects" class="nav-chip">Projects</a></li>
+        <li><a href="contact.html" class="nav-chip">Contact</a></li>
+      </ul>
 
-  <!-- Navbar -->
-  <header>
-    <nav class="flex center bg-teal-500 p-4" aria-label="Main navigation">
-      <div class="container flex justify-between items-center py-4 md:py-4 gap-2">
-
-        <!-- Logo -->
-        <div class="flex items-center">
-          <img class="logo !w-16 !h-auto sm:!w-20 md:!w-24 lg:!w-32" src="src/images/logo.png" alt="home-logo" />
-        </div>
-
-        <!-- Desktop Navigation -->
-        <ul class="hidden sm:flex space-x-4 justify-center w-full">
-          <li><a href="index.html"
-              class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">Home</a></li>
-          <li><a href="#about" class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">About</a>
-          </li>
-          <li><a href="#projects"
-              class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">Projects</a></li>
-          <li><a href="contact.html"
-              class="text-white px-3 py-2 text-sm font-medium rounded-md hover:bg-teal-600">Contact</a></li>
-        </ul>
-
-        <!-- Mobile Menu Button (visible on small screens) -->
-        <div class="block sm:hidden">
-          <button id="mobile-menu-toggle" type="button" aria-expanded="false"
-            class="text-white p-2 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-
+      <div class="block sm:hidden">
+        <button id="mobile-menu-toggle" type="button" aria-expanded="false"
+          class="nav-toggle focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-200">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
     </nav>
 
-    <!-- Mobile Menu (hidden by default, shown when toggled) -->
-    <div id="mobile-menu" class="sm:hidden hidden">
-      <ul class="flex flex-col bg-teal-500 center space-y-1 px-2 py-3">
-        <li><a href="index.html"
-            class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">Home</a></li>
-        <li><a href="#about"
-            class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">About</a></li>
-        <li><a href="#projects"
-            class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">Projects</a></li>
-        <li><a href="contact.html"
-            class="block text-white px-3 py-2 text-base font-medium rounded-md hover:bg-teal-600">Contact</a></li>
+    <div id="mobile-menu" class="sm:hidden hidden border-t border-white/15">
+      <ul class="mobile-links">
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="#about" class="mobile-link" aria-current="page">About</a></li>
+        <li><a href="#projects" class="mobile-link">Projects</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact</a></li>
       </ul>
     </div>
   </header>
 
+  <main>
+    <section id="hero-section" class="content-shell">
+      <div class="hero-grid">
+        <div class="reveal-item" data-stagger="0">
+          <span class="pill"><i class="fas fa-video"></i> New York Storytelling Studio</span>
+          <h1 class="hero-title">
+            Films with <span class="highlight">heart</span>,
+            crafted for impact.
+          </h1>
+          <p class="hero-copy">
+            I am Salif Soumahoro, a director, videographer, and editor focused on visual work that drives emotion and action.
+            From beauty and sports to brand and institutional stories, each project is designed to empower people and move culture forward.
+          </p>
+          <div class="cta-row">
+            <a href="#projects" class="btn-primary">View Selected Projects</a>
+            <a href="contact.html" class="btn-secondary">Start a Conversation</a>
+          </div>
+          <div class="stats-row">
+            <div class="stat">
+              <strong>Brand + Culture</strong>
+              <span>Beauty, sports, nonprofit, and corporate storytelling</span>
+            </div>
+            <div class="stat">
+              <strong>Director to Edit</strong>
+              <span>Full-stack production from concept through final cut</span>
+            </div>
+            <div class="stat">
+              <strong>NYC Based</strong>
+              <span>Locally rooted, globally inspired visual language</span>
+            </div>
+          </div>
+        </div>
 
-  <div class="ab-container">
+        <div class="hero-visual reveal-item" data-stagger="120">
+          <img src="/src/images/about-image.png" alt="Portrait of Salif Soumahoro" loading="lazy" />
+        </div>
+      </div>
+    </section>
 
-    <!-- Hero Section -->
-    <section id="hero-section">
-      <div class="bg-black text-white py-20">
-        <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+    <section id="about" class="content-shell pb-10">
+      <div class="story-grid">
+        <article class="story-card reveal-item" data-stagger="0" data-aos="fade-up" data-aos-duration="800">
+          <span class="pill"><i class="fas fa-seedling"></i> My Story</span>
+          <h2 class="text-3xl mt-4 mb-4">Built in Harlem, shaped by purpose.</h2>
+          <p>
+            Born and raised in Harlem to immigrant parents from Ivory Coast, I found inspiration through media when positive examples felt out of reach.
+            Movies, sports broadcasts, and even commercials showed me possibility and planted the confidence to create a different future.
+          </p>
+          <p>
+            That curiosity became discipline. I studied what creates excellence, then translated those lessons into collaborative, cinematic work.
+            My goal is simple: help people and brands tell stories that feel honest, bold, and unforgettable.
+          </p>
+        </article>
 
-          <!-- Hero Content -->
-          <section class="hero-content flex flex-col w-full lg:w-1/3 justify-center items-start p-8" data-aos="fade-up"
-            data-aos-duration="1000">
-            <h1 class="text-3xl md:text-5xl p-2 text-custom-teal uppercase tracking-loose">Mansa Leaf Productions</h1>
-            <!-- <h2 class="text-3xl md:text-5xl leading-relaxed md:leading-snug mb-4">Creative Content That Connects</h2> -->
-            <p class="text-white-800 leading-relaxed max-w-prose mb-6">
-              I'm Salif Soumahoro, I’m a director, videographer, and editor based in New York City, driven by a passion
-              for storytelling through the visual medium. My goal is to create high-quality visuals that not only evoke
-              emotion but also spark a call to action or inspire change.
-              I specialize in beauty, sports, branding, and corporate work, but what truly defines my creative vision is
-              a clean, empowering, and idealistic aesthetic.
-
-              I believe the work I create should leave a lasting imprint, inspiring and motivating those who experience
-              it. As a
-              first-generation immigrant, my upbringing shapes this vision, fueling my desire to produce content that
-              resonates deeply and drives transformation.
-              At my core, I am a collaborative visionary, committed to elevating and inspiring those who seek meaningful
-              change through the power of video.</p>
-
-
-
-            <a href="#about"
-              class="bg-transparent hover:bg-custom-teal text-white hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-custom-teal hover:border-transparent transition-colors duration-300">
-              Learn More
-            </a>
-          </section>
-
-          <!-- Images -->
-          <div class="hero-img p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 justify-center">
-            <div class="hero-img-content flex items-center">
-              <div class="flex items-center" data-aos="fade-left" data-aos-duration="1000">
-                <img class="mt-28 hidden xl:block rounded-full" src="/src/images/IMG_9897.JPG"
-                  alt="Portrait of Salif Soumahoro">
+        <aside class="principles-card reveal-item" data-stagger="120" data-aos="fade-up" data-aos-duration="900">
+          <span class="pill"><i class="fas fa-compass"></i> Creative Principles</span>
+          <div class="principles-list">
+            <div class="principle">
+              <i class="fas fa-lightbulb"></i>
+              <div>
+                <h3>Clarity Over Noise</h3>
+                <p>Every frame should serve the message, not distract from it.</p>
               </div>
-              <div class="middle-img flex items-center" data-aos="fade-up" data-aos-duration="1000">
-                <img class="mt-24 md:mt-0 p-8 md:p-0 rounded-full" src="/src/images/heroimg3.png"
-                  alt="Salif Soumahoro at work">
+            </div>
+            <div class="principle">
+              <i class="fas fa-users"></i>
+              <div>
+                <h3>Collaboration First</h3>
+                <p>The best work happens when vision is built together, not imposed.</p>
               </div>
-              <div class="flex items-center" data-aos="fade-right" data-aos-duration="1000">
-                <img class="mt-28 hidden lg:block rounded-full" src="/src/images/heroimg2.png"
-                  alt="Creative session with Salif Soumahoro">
+            </div>
+            <div class="principle">
+              <i class="fas fa-arrow-up-right-dots"></i>
+              <div>
+                <h3>Growth Mindset</h3>
+                <p>I create to inspire movement, confidence, and meaningful change.</p>
               </div>
             </div>
           </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- Hero End -->
-
-
-
-
-    <!-- About Section -->
-
-    <section id="about" class="py-16 bg-gray-50">
-      <div class="container mx-auto px-6 lg:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- About Image -->
-          <div class="about-left flex justify-center" data-aos="fade-right" data-aos-duration="1000">
-            <img src="/src/images/about-image.png" alt="Portrait of the content creator"
-              class="w-full max-w-md rounded-lg shadow-lg lg:max-w-lg hover:scale-105 transition-transform duration-300 ease-in-out"
-              loading="lazy" />
-          </div>
-
-          <!-- About Content -->
-          <div data-aos="fade-left" data-aos-duration="1000">
-            <h2 class="text-3xl font-bold text-teal-500 mb-6">About Me</h2>
-
-            <p class="text-lg text-gray-700 leading-relaxed mb-8">
-
-
-              I was born and raised in Harlem, NY, to immigrant parents from Ivory Coast. Growing up, positive
-              influences were scarce, and inspiration seemed out of reach. But through media—whether it was cinema,
-              sports, or even the fleeting commercials between shows—I discovered a world beyond my circumstances. These
-              glimpses of greatness gave me the confidence to believe that change was possible.
-              I started researching what makes people successful, and that curiosity fueled my education and creativity.
-              I realized that through collaboration and determination, something powerful could be created—even from the
-              humblest of beginnings. I wanted to be a beacon for those who felt hopeless or for those just starting
-              their journey, to show them that greatness is achievable.
-              I refuse to be confined by labels or limitations. Being boxed in creates doubt, and no one should ever
-              feel limited. I push boundaries in every area of my life, and my mission is to help others do the same.
-              Change is possible, and it starts with embracing the potential within, no matter where you come from.
-            </p>
-            <a href="#projects"
-              class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-teal-500 hover:bg-teal-600 rounded-lg shadow-md transition duration-300"
-              aria-label="Learn more about my work" data-aos="zoom-in" data-aos-duration="1000">
-              <i class="fas fa-chevron-down mr-2"></i> My Projects
-            </a>
-          </div>
-        </div>
+        </aside>
       </div>
     </section>
 
-    <!-- Video Gallery  -->
     <section id="projects">
-      <div class="gallery-container">
-        <h2>My Projects</h2>
+      <div class="gallery-container reveal-item" data-stagger="0">
+        <h2>Selected Work</h2>
 
         <div class="swiper-container">
-           <div class="swiper-wrapper">
+          <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1077260273?h=5c35563d9a"  allowfullscreen></iframe>
-              <p class="video-description">Akin by Katherine <br> Brand Promo <br></p>
+              <iframe title="Akin by Katherine Brand Promo" src="https://player.vimeo.com/video/1077260273?h=5c35563d9a" allowfullscreen></iframe>
+              <p class="video-description">Akin by Katherine<br />Brand Promo</p>
             </div>
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1077265772?h=286b116ae5"  allowfullscreen></iframe>
-              <p class="video-description">Nike Spec Ad <br> Overcoming challenges <br></p>
-            </div>
-            
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1077284410?h=d303c745cd" frameborder="0"    allowfullscreen></iframe>
-              <p class="video-description">Brooklyn College Athletics <br> Corporate/institutional promo video <br></p>
-            </div>
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1077288458?h=1285c9bb6b"  frameborder="0"    allowfullscreen></iframe>
-              <p class="video-description">Brooklyn College Black and Latino Male Initiative <br> Corporate/institutional promo video <br></p>
-            </div>
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1078961264?h=8daff642b0"  frameborder="0"    allowfullscreen></iframe>
-              <p class="video-description">Smiley Day <br> Event Recap Video <br> </p>
-            </div>
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1077271172?h=a77fd82afc"  frameborder="0"    allowfullscreen></iframe>
-              <p class="video-description">Studio Session: Dyemond Lewis - Tre Flip <br> Music Video <br> </p>
-            </div>
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1096967843?h=8cfad41cb3" frameborder="0"    allowfullscreen></iframe>
-              <p class="video-description">CUNY EDGE <br>  <br> </p>
-            </div>
-    
-            <div class="swiper-slide">
-              <iframe title="vimeo-player" src="https://player.vimeo.com/video/1077272457?h=7d6c70e79f"  frameborder="0"    allowfullscreen></iframe>
-              <p class="video-description">Naomi Campbell Tribute <br> </p>
-            </div>
-          </div> 
 
-          
+            <div class="swiper-slide">
+              <iframe title="Nike Spec Ad" src="https://player.vimeo.com/video/1077265772?h=286b116ae5" allowfullscreen></iframe>
+              <p class="video-description">Nike Spec Ad<br />Overcoming challenges</p>
+            </div>
 
-          <!-- Navigation -->
+            <div class="swiper-slide">
+              <iframe title="Brooklyn College Athletics" src="https://player.vimeo.com/video/1077284410?h=d303c745cd" allowfullscreen></iframe>
+              <p class="video-description">Brooklyn College Athletics<br />Corporate and institutional promo</p>
+            </div>
+
+            <div class="swiper-slide">
+              <iframe title="Brooklyn College BLMI" src="https://player.vimeo.com/video/1077288458?h=1285c9bb6b" allowfullscreen></iframe>
+              <p class="video-description">Brooklyn College BLMI<br />Corporate and institutional promo</p>
+            </div>
+
+            <div class="swiper-slide">
+              <iframe title="Smiley Day Event Recap" src="https://player.vimeo.com/video/1078961264?h=8daff642b0" allowfullscreen></iframe>
+              <p class="video-description">Smiley Day<br />Event recap video</p>
+            </div>
+
+            <div class="swiper-slide">
+              <iframe title="Studio Session Dyemond Lewis" src="https://player.vimeo.com/video/1077271172?h=a77fd82afc" allowfullscreen></iframe>
+              <p class="video-description">Studio Session: Dyemond Lewis - Tre Flip<br />Music video</p>
+            </div>
+
+            <div class="swiper-slide">
+              <iframe title="CUNY EDGE" src="https://player.vimeo.com/video/1096967843?h=8cfad41cb3" allowfullscreen></iframe>
+              <p class="video-description">CUNY EDGE</p>
+            </div>
+
+            <div class="swiper-slide">
+              <iframe title="Naomi Campbell Tribute" src="https://player.vimeo.com/video/1077272457?h=7d6c70e79f" allowfullscreen></iframe>
+              <p class="video-description">Naomi Campbell Tribute</p>
+            </div>
+          </div>
+
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
-
-          <!-- Pagination -->
           <div class="swiper-pagination"></div>
         </div>
       </div>
     </section>
+  </main>
 
-
-
-
-
-    <!-- Foooter -->
-    <section class="bg-white">
-      <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
-        <nav class="flex flex-wrap justify-center -mx-5 -my-2">
-          <div class="px-5 py-2">
-            <a href="terms.html" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Terms and Conditions
-            </a>
-          </div>
-        </nav>
-        <div class="flex justify-center mt-8 space-x-6">
-
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-            <span class="sr-only">Instagram</span>
-            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd"
-                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </a>
-
-
-
-        </div>
-        <p class="mt-8 text-base leading-6 text-center text-gray-400">
-          © 2025 Chukwu Tech Solutions, Inc. All rights reserved.
-        </p>
+  <footer class="site-footer">
+    <div class="content-shell footer-shell">
+      <div class="footer-brand">
+        <p class="footer-kicker">Mansa Leaf Productions</p>
+        <h2>Creative direction, storytelling, and production with intention.</h2>
+        <p class="footer-copy">A cinematic portfolio for brand work, visual campaigns, and thoughtful motion content.</p>
       </div>
-    </section>
-    <!-- end of footer -->
 
-    <script>
-      // Initialize AOS
-      AOS.init({
-        duration: 1000, // Default duration for animations
-        easing: 'ease-in-out', // Default easing
-        once: true, // Trigger animation only once
-        mirror: false // Prevent animations from being triggered when scrolling back
-      });
-    </script>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="terms.html">Terms and Conditions</a>
+        <a href="contact.html">Start a project</a>
+      </nav>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const swiper = new Swiper(".swiper-container", {
-          spaceBetween: 30,
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="content-shell footer-bottom">
+      <p>© 2025 Chukwu Tech Solutions, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.getElementById("mobile-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", function () {
+          const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+          menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+          mobileMenu.classList.toggle("hidden");
+        });
+      }
+
+      if (window.AOS) {
+        AOS.init({
+          duration: 800,
+          easing: "ease-out-cubic",
+          once: true,
+          mirror: false
+        });
+      }
+
+      if (window.Swiper) {
+        new Swiper(".swiper-container", {
+          spaceBetween: 14,
           loop: false,
-
+          watchOverflow: true,
           grid: {
             rows: 2,
-            fill: "row",
+            fill: "row"
           },
-
           navigation: {
             nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            prevEl: ".swiper-button-prev"
           },
-
           pagination: {
             el: ".swiper-pagination",
-            clickable: true,
+            clickable: true
           },
-
           breakpoints: {
-            320: {
+            0: {
               slidesPerView: 1,
-              grid: {
-                rows: 1,
-              },
+              spaceBetween: 12,
+              grid: { rows: 1 }
             },
-            768: {
+            640: {
               slidesPerView: 2,
-              grid: {
-                rows: 2,
-              },
+              spaceBetween: 14,
+              grid: { rows: 1 }
             },
-            1024: {
+            900: {
+              slidesPerView: 2,
+              spaceBetween: 16,
+              grid: { rows: 2 }
+            },
+            1200: {
+              slidesPerView: 3,
+              spaceBetween: 18,
+              grid: { rows: 2 }
+            },
+            1440: {
               slidesPerView: 4,
-              grid: {
-                rows: 2,
-              },
-            },
-          },
+              spaceBetween: 20,
+              grid: { rows: 2 }
+            }
+          }
         });
-      });
-    </script>
+      }
 
-    <script>
-      // Play button logic: Replace thumbnail and play button with iframe
-      document.querySelectorAll(".video-wrapper").forEach(wrapper => {
-        wrapper.addEventListener("click", function () {
-          // Get the video source URL with autoplay
-          const videoSrc = this.dataset.videoSrc + "?autoplay=1";
-          const iframe = document.createElement("iframe");
-          iframe.src = videoSrc;
-          iframe.width = "100%";
-          iframe.height = "100%";
-          iframe.allow = "autoplay";
-          iframe.allowFullscreen = true;
-          iframe.style.border = "none";
-          iframe.style.borderRadius = "10px";
-
-          // Clear the video wrapper's content and add the iframe
-          this.innerHTML = "";
-          this.appendChild(iframe);
-        });
-      });
-    </script>
-
-    <script>
-      // Play Button Functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        const playButtons = document.querySelectorAll('.play-button');
-
-        playButtons.forEach(button => {
-          button.addEventListener('click', function () {
-            const videoWrapper = button.closest('.video-wrapper');
-            const videoSrc = videoWrapper.getAttribute('data-video-src');
-            const iframe = document.createElement('iframe');
-            iframe.src = videoSrc;
-            iframe.width = "640";
-            iframe.height = "480";
-            iframe.allow = "autoplay";
-
-
-            // Replace thumbnail and play button with iframe
-            videoWrapper.innerHTML = ''; // Clear the content
-            videoWrapper.appendChild(iframe); // Add iframe
+      const revealItems = document.querySelectorAll(".reveal-item");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const delay = Number(entry.target.dataset.stagger || 0);
+              setTimeout(function () {
+                entry.target.classList.add("is-visible");
+              }, delay);
+              observer.unobserve(entry.target);
+            }
           });
-        });
-      });
-    </script>
-</body>
+        },
+        { threshold: 0.2 }
+      );
 
+      revealItems.forEach((item) => observer.observe(item));
+    });
+  </script>
+</body>
 </html>
